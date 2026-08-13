@@ -1,6 +1,6 @@
 <img src="assets/main.png" width="900">
 
-# Operation Overreach — Threat Hunt Report
+# Threat Hunt Report on Operation Overreach
 
 **Case:** GF-INC-2026-0806 · Greenfield Logistics // Security Operations
 **Platform:** Hybrid — Entra ID + on-prem Active Directory
