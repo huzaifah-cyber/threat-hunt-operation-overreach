@@ -1109,8 +1109,6 @@ LLMAgentLogs_CL
 | **Answer** | Detection without response; incident-response process / alert triage and escalation |
 | **Time (UTC)** | 2026-08-06T12:53:22Z |
 
-**Details:** The classic techniques were detected and correlated, so the failure was not in detection or tooling. The incident that fired was not converted into an effective response. The cheapest control is a process control: mandatory alert triage and escalation with an incident-response playbook, ensuring a detected high-confidence incident is acted on rather than simply recorded.
-
 ---
 
 ### 🚩 Flag 41 — Session Containment
@@ -1123,8 +1121,6 @@ LLMAgentLogs_CL
 |---|---|
 | **Answer** | Revoke/invalidate the active session first; a password reset alone does not terminate an already-issued live session/token |
 | **Time (UTC)** | N/A |
-
-**Details:** The attacker holds a replayed session rather than the password, so the first containment action is to invalidate/revoke the active session or token. A password reset alone does not kill an already-issued live session. After session invalidation, credentials can be reset and fresh authentication required.
 
 ---
 
@@ -1139,8 +1135,6 @@ LLMAgentLogs_CL
 | **Answer** | Reject, unless the four IPs are confirmed stable, attacker-controlled, unique, and not shared with legitimate traffic |
 | **Time (UTC)** | N/A |
 
-**Details:** Blanket IP blocking should be rejected until the four exit addresses are verified as stable, uniquely associated with the attacker, and not shared by legitimate traffic. Blocking unverified or shared addresses could disrupt legitimate users while providing limited containment if the attacker can rotate exit addresses.
-
 ---
 
 ### 🚩 Flag 43 — The krbtgt Rotation
@@ -1153,8 +1147,6 @@ LLMAgentLogs_CL
 |---|---|
 | **Answer** | Rotate krbtgt twice, with the rotations separated by a sufficient interval for previously issued Kerberos tickets to expire. |
 | **Time (UTC)** | N/A |
-
-**Details:** Rotate krbtgt twice, with the rotations separated by a sufficient interval for previously issued Kerberos tickets to expire.
 
 ---
 
@@ -1169,8 +1161,6 @@ LLMAgentLogs_CL
 | **Answer** | No. The attacker is not evicted because the persistence survives all three actions. The certificate-based persistence does not depend on the account being enabled, the Tier 0 group membership, or the original certificate remaining valid. |
 | **Time (UTC)** | N/A |
 
-**Details:** No. The attacker is not evicted because the persistence survives all three actions. The certificate-based persistence does not depend on the account being enabled, the Tier 0 group membership, or the original certificate remaining valid.
-
 ---
 
 ### 🚩 Flag 45 — The Template Problem
@@ -1183,8 +1173,6 @@ LLMAgentLogs_CL
 |---|---|
 | **Answer** | No. Revoking the certificate only invalidates that specific certificate. To close the ADCS persistence path, fix or disable the vulnerable certificate template and remove the privilege path that allows the attacker to obtain another certificate. |
 | **Time (UTC)** | N/A |
-
-**Details:** No. Revoking the certificate only invalidates that specific certificate. To close the ADCS persistence path, fix or disable the vulnerable certificate template and remove the privilege path that allows the attacker to obtain another certificate.
 
 ---
 
@@ -1199,8 +1187,6 @@ LLMAgentLogs_CL
 | **Answer** | Reject. A detection rule only fires after the action has occurred, so it cannot prevent this class of authorisation failure. The alternative is preventive authorisation controls at the gate, requiring independent verification of the requester and target account before allowing the action. |
 | **Time (UTC)** | N/A |
 
-**Details:** Reject. A detection rule only fires after the action has occurred, so it cannot prevent this class of authorisation failure. The alternative is preventive authorisation controls at the gate, requiring independent verification of the requester and target account before allowing the action.
-
 ---
 
 ### 🚩 Flag 47 — The Forwarding Hunt
@@ -1213,8 +1199,6 @@ LLMAgentLogs_CL
 |---|---|
 | **Answer** | The inbox-rule hunt fails because the forwarding was set with Set-Mailbox, which changes the mailbox forwarding property rather than creating an inbox rule. Instead, remove the unauthorized mailbox-level forwarding configuration. |
 | **Time (UTC)** | N/A |
-
-**Details:** The inbox-rule hunt fails because the forwarding was set with Set-Mailbox, which changes the mailbox forwarding property rather than creating an inbox rule. Instead, remove the unauthorized mailbox-level forwarding configuration.
 
 ---
 
@@ -1229,8 +1213,6 @@ LLMAgentLogs_CL
 | **Answer** | TOTP re-enrolment is insufficient because the attacker has possession of the existing TOTP seed and can continue generating valid codes. The alternative is to revoke the compromised TOTP factor and move the account to phishing-resistant MFA, such as FIDO2/WebAuthn. |
 | **Time (UTC)** | N/A |
 
-**Details:** TOTP re-enrolment is insufficient because the attacker has possession of the existing TOTP seed and can continue generating valid codes. The alternative is to revoke the compromised TOTP factor and move the account to phishing-resistant MFA, such as FIDO2/WebAuthn.
-
 ---
 
 ### 🚩 Flag 49 — Rank the Interventions
@@ -1241,12 +1223,10 @@ LLMAgentLogs_CL
 
 | Field | Value |
 |---|---|
-| **Answer** | Incident response and escalation: The highest-impact intervention. A high-confidence alert had already fired; opening and escalating the incident would have allowed containment before the attacker could continue the chain. 
-Preventive authorisation controls: Require independent verification that the requester is authorised to reset the target account. This would have stopped the confused-deputy action before execution. 
-Cross-source detection and correlation: Correlate LLMAgentLogs_CL with WindowsAccountMgmt_CL so the injected agent request and resulting reset are detected together. This improves detection, but it is less impactful than acting on an alert that already fired or preventing the action. |
+| **Answer** | Incident response and escalation: The highest-impact intervention. A high-confidence alert had already fired. | 
+| | Preventive authorisation controls: Require independent verification that the requester is authorised to reset the target account. | 
+| | Cross-source detection and correlation: Correlate LLMAgentLogs_CL with WindowsAccountMgmt_CL so the injected agent request and resulting reset are detected together. |
 | **Time (UTC)** | N/A |
-
-**Details:** Same as the flag above.
 
 ---
 
@@ -1260,8 +1240,6 @@ Cross-source detection and correlation: Correlate LLMAgentLogs_CL with WindowsAc
 |---|---|
 | **Answer** | 1. krbtgt (double rotation), 2. DSRM/DC Admin, 3. GPP/SYSVOL (strip source first to prevent re-burning), 4. Service accounts, 5. User accounts, 6. App credentials. |
 | **Time (UTC)** | N/A |
-
-**Details:** Rotations ordered from widest blast radius down to isolated services. GPP/SYSVOL sources must be stripped before credential resets to prevent immediate re-exposure.
 
 ---
 
