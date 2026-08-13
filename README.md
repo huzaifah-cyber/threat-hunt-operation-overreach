@@ -1,8 +1,12 @@
+<img src="assets/main.png" width="900">
+
 # Operation Overreach — Threat Hunt Report
 
 **Case:** GF-INC-2026-0806 · Greenfield Logistics // Security Operations
 **Platform:** Hybrid — Entra ID + on-prem Active Directory
 **Window:** 5–6 August 2026
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=48&duration=3000&pause=900&color=FF0000&background=000000FF&center=true&vCenter=true&width=1100&height=100&lines=OPERATION+OVERREACH;The+Agent+Obeyed+,+The+Domain+Fell;That+Was+the+Whole+Problem;SENTINEL+ONLINE;&repeat=true" alt="Typing SVG">
 
 ---
 
@@ -155,7 +159,7 @@ Work Operation Overreach as a real post-compromise engagement: triage the correl
 
 **Details:** Possible use of a stolen session cookie where user m.smith (user) was impacted.
 
-<img src="assets/1.png" width="900">
+<img src="assets/1.png" width="500">
 
 ---
 
@@ -172,7 +176,7 @@ Work Operation Overreach as a real post-compromise engagement: triage the correl
 
 **Details:** A possibly compromised user account signed in. An automated tool used for discovery     successfully logged into a user account, indicating that the user account's credentials might have been leaked or are in the possession of an unauthorized party.
 
-<img src="assets/2.png" width="900">
+<img src="assets/2.png" width="500">
 
 ---
 
