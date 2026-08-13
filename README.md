@@ -155,6 +155,8 @@ Work Operation Overreach as a real post-compromise engagement: triage the correl
 
 **Details:** Possible use of a stolen session cookie where user m.smith (user) was impacted.
 
+<img src="assets/1.png" width="900">
+
 ---
 
 ### 🚩 Flag 2 — The Second High
@@ -169,6 +171,8 @@ Work Operation Overreach as a real post-compromise engagement: triage the correl
 | **Time (UTC)** | 2026-08-05 19:04:50 UTC |
 
 **Details:** A possibly compromised user account signed in. An automated tool used for discovery     successfully logged into a user account, indicating that the user account's credentials might have been leaked or are in the possession of an unauthorized party.
+
+<img src="assets/2.png" width="900">
 
 ---
 
@@ -193,6 +197,8 @@ SecurityAlert
 | project TimeGenerated, AlertName, AlertSeverity, Description, CompromisedEntity, ExtendedProperties
 | order by TimeGenerated asc
 ```
+
+<img src="assets/3.png" width="900">
 
 ---
 
@@ -222,6 +228,8 @@ LinuxAuth_CL
 | order by TimeGenerated asc
 ```
 
+<img src="assets/4.png" width="900">
+
 ---
 
 ### 🚩 Flag 5 — First Contact
@@ -245,6 +253,8 @@ IdentityLogonEvents
 | order by TimeGenerated asc
 | project TimeStr = format_datetime(TimeGenerated, 'HH:mm:ss.fff'), ActionType, LogonType, Protocol, FailureReason, IPAddress, DeviceName, Application
 ```
+
+<img src="assets/5.png" width="900">
 
 ---
 
@@ -270,6 +280,8 @@ AADNonInteractiveUserSignInLogs
 | order by FirstSeen asc
 ```
 
+<img src="assets/6.png" width="900">
+
 ---
 
 ### 🚩 Flag 7 — The Pivot Record
@@ -294,6 +306,8 @@ UrlClickEvents
 | project Timestamp, Url, ActionType, IsClickedThrough, Workload, NetworkMessageId
 ```
 
+<img src="assets/7.png" width="900">
+
 ---
 
 ### 🚩 Flag 8 — The Restore
@@ -316,6 +330,8 @@ CloudAppEvents
 | where AccountDisplayName == "Mark Smith"
 | where ActionType == "FileRestored"
 ```
+
+<img src="assets/8.png" width="900">
 
 ---
 
@@ -342,6 +358,8 @@ OfficeActivity
 | project-reorder TimeGenerated, UserAgent, Operation, OfficeObjectId, *
 ```
 
+<img src="assets/9.png" width="900">
+
 ---
 
 ### 🚩 Flag 10 — The Hidden Forward
@@ -364,6 +382,8 @@ OfficeActivity
 | where UserId == "m.smith@lognpacific.org"
 | where Operation == "Set-Mailbox"
 ```
+
+<img src="assets/10.png" width="900">
 
 ---
 
@@ -388,6 +408,8 @@ OfficeActivity
 | where Operation == "SoftDelete"
 ```
 
+<img src="assets/11.png" width="900">
+
 ---
 
 ### 🚩 Flag 12 — The Auto-Dismissal
@@ -411,6 +433,8 @@ AADUserRiskEvents
 | order by TimeGenerated asc
 | project TimeGenerated, RiskEventType, RiskLevel, RiskState, RiskDetail, Source, DetectionTimingType
 ```
+
+<img src="assets/12.png" width="900">
 
 ---
 
@@ -437,6 +461,8 @@ MicrosoftGraphActivityLogs
 | extend CallsPerSecond = todouble(TotalCalls) / 60
 ```
 
+<img src="assets/13.png" width="900">
+
 ---
 
 ### 🚩 Flag 14 — The Refused Reads
@@ -460,6 +486,8 @@ MicrosoftGraphActivityLogs
 | where ResponseStatusCode != "200"
 | project TimeGenerated, ResponseStatusCode, RequestUri, AppId
 ```
+
+<img src="assets/14.png" width="900">
 
 ---
 
@@ -487,6 +515,8 @@ AuditLogs
 | project TimeGenerated, OperationName, ActivityDisplayName, Category, LoggedByService, AADOperationType, Result, InitiatorUpn, TargetResources
 ```
 
+<img src="assets/15.png" width="900">
+
 ---
 
 ### 🚩 Flag 16 — The Walled-Off Collector
@@ -513,6 +543,8 @@ AADNonInteractiveUserSignInLogs
 | project TimeGenerated, ResourceDisplayName, ResultType, ResultDescription, ConditionalAccessStatus
 ```
 
+<img src="assets/16.png" width="900">
+
 ---
 
 ### 🚩 Flag 17 — The Stolen Seed
@@ -538,6 +570,8 @@ LinuxAuth_CL
 | order by TimeGenerated asc
 ```
 
+<img src="assets/17.png" width="900">
+
 ---
 
 ### 🚩 Flag 18 — The Internal Sweep
@@ -561,6 +595,8 @@ NTANetAnalytics
 | summarize DistinctPorts=dcount(DestPort), Ports=make_set(DestPort) by SrcIp, DestIp
 | order by DistinctPorts desc
 ```
+
+<img src="assets/18.png" width="900">
 
 ---
 
@@ -586,6 +622,8 @@ WindowsObjectAccess_CL
 | project TimeGenerated, RelativeTargetName, ShareName, ObjectName
 ```
 
+<img src="assets/19.png" width="900">
+
 ---
 
 ### 🚩 Flag 20 — The Reset Actor
@@ -608,6 +646,8 @@ WindowsAccountMgmt_CL
 | where EventID == "4724"
 | order by TimeGenerated asc
 ```
+
+<img src="assets/20.png" width="900">
 
 ---
 
@@ -633,6 +673,8 @@ LLMAgentLogs_CL
 | order by TimeGenerated asc
 ```
 
+<img src="assets/21.png" width="900">
+
 ---
 
 ### 🚩 Flag 22 — The Gate Marker
@@ -657,6 +699,8 @@ LLMAgentLogs_CL
 | order by TimeGenerated asc
 ```
 
+<img src="assets/22.png" width="900">
+
 ---
 
 ### 🚩 Flag 23 — The Tool Call
@@ -680,6 +724,8 @@ MCPToolCalls_CL
 | order by TimeGenerated asc
 ```
 
+<img src="assets/23.png" width="900">
+
 ---
 
 ### 🚩 Flag 24 — The Password Source
@@ -702,6 +748,8 @@ MCPToolCalls_CL
 | project TimeGenerated, mcp_server, tool, arguments, result, caller, session
 | order by TimeGenerated asc
 ```
+
+<img src="assets/24.png" width="900">
 
 ---
 
@@ -731,6 +779,8 @@ WindowsAccountMgmt_CL
 | order by TimeGenerated asc
 ```
 
+<img src="assets/25.png" width="900">
+
 ---
 
 ### 🚩 Flag 26 — The Coverage Gap
@@ -754,6 +804,8 @@ SecurityAlert
 | project TimeGenerated, AlertName, AlertSeverity, Description, CompromisedEntity
 (run against both workspaces)
 ```
+
+<img src="assets/26.png" width="900">
 
 ---
 
@@ -779,6 +831,8 @@ WindowsCertServices_CL
 | project-reorder TimeGenerated, EventOriginalType, *
 ```
 
+<img src="assets/27.png" width="900">
+
 ---
 
 ### 🚩 Flag 28 — The Binding Question
@@ -803,6 +857,8 @@ WindowsCertServices_CL
 | project TimeGenerated, DvcHostname, EventOriginalType, CertificateTemplate, EventData
 ```
 
+<img src="assets/28.png" width="900">
+
 ---
 
 ### 🚩 Flag 29 — The Silent Group Add
@@ -826,6 +882,8 @@ SecurityEvent
 | order by TimeGenerated asc
 | project TimeGenerated, SubjectUserName, TargetUserName, MemberName
 ```
+
+<img src="assets/29.png" width="900">
 
 ---
 
@@ -852,6 +910,8 @@ SecurityEvent
 | order by Count desc
 ```
 
+<img src="assets/30.png" width="900">
+
 ---
 
 ### 🚩 Flag 31 — The Surviving ACE
@@ -875,6 +935,8 @@ WindowsDirChanges_CL
 | order by TimeGenerated asc
 | project TimeGenerated, SubjectAccount, TargetObject, EventData
 ```
+
+<img src="assets/31.png" width="900">
 
 ---
 
@@ -901,6 +963,8 @@ SecurityEvent
 | order by FirstSeen asc
 ```
 
+<img src="assets/32.png" width="900">
+
 ---
 
 ### 🚩 Flag 33 — The Scheduling Gap
@@ -925,6 +989,8 @@ SecurityIncident
 Cross-referenced against the alert "GF Directory - Replication Rights By Non-Machine Account" (LAW-SilentCorridor), First activity 12:16:37 PM, Generated 12:53:22 PM.
 ```
 
+<img src="assets/33.png" width="900">
+
 ---
 
 ### 🚩 Flag 34 — The Published Key
@@ -948,6 +1014,8 @@ WindowsObjectAccess_CL
 | project TimeGenerated, SrcIpAddr, RelativeTargetName, ShareName, ObjectName
 ```
 
+<img src="assets/34.png" width="900">
+
 ---
 
 ### 🚩 Flag 35 — The Recovery Account
@@ -970,6 +1038,8 @@ WindowsObjectAccess_CL
 | where ObjectName has "credentials.txt" or RelativeTargetName has "credentials.txt"
 | project TimeGenerated, SrcIpAddr, RelativeTargetName, ShareName, ObjectName
 ```
+
+<img src="assets/35.png" width="900">
 
 ---
 
@@ -996,6 +1066,8 @@ SecurityEvent
 | project TimeGenerated, TargetUserName, LogonType, IpAddress
 ```
 
+<img src="assets/36.png" width="900">
+
 ---
 
 ### 🚩 Flag 37 — The Disclosure Threshold
@@ -1020,6 +1092,8 @@ WindowsObjectAccess_CL
 | order by TimeGenerated asc
 ```
 
+<img src="assets/37.png" width="900">
+
 ---
 
 ### 🚩 Flag 38 — The Coverage Inversion
@@ -1042,6 +1116,8 @@ LLMAgentLogs_CL
 | project TimeGenerated, session_id, actor, tool_name, tool_args, tool_result, gate_decision, gate_reason, gate_marker_text
 | order by TimeGenerated asc
 ```
+
+<img src="assets/38.png" width="900">
 
 ---
 
@@ -1072,6 +1148,8 @@ LLMAgentLogs_CL
 | where TargetAccount != actor
 | project TimeGenerated, actor, TargetAccount, gate_reason, ResetTime, ActorUsername
 ```
+
+<img src="assets/39.png" width="900">
 
 ---
 
