@@ -6,7 +6,7 @@
 **Platform:** Hybrid — Entra ID + on-prem Active Directory
 **Window:** 5–6 August 2026
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=48&duration=3000&pause=900&color=FF0000&background=000000FF&center=true&vCenter=true&width=1100&height=100&lines=OPERATION+OVERREACH;The+Agent+Obeyed+,+The+Domain+Fell;That+Was+the+Whole+Problem;SENTINEL+ONLINE;&repeat=true" alt="Typing SVG">
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=48&duration=3000&pause=900&color=FF0000&background=000000FF&center=true&vCenter=true&width=1100&height=100&lines=OPERATION+OVERREACH;The+Agent+Obeyed;That+was+the+Whole+Problem;SENTINEL+ONLINE;&repeat=true" alt="Typing SVG">
 
 ---
 
