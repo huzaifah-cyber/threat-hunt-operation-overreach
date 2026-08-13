@@ -1,6 +1,6 @@
 <img src="assets/main.png" width="900">
 
-# Threat Hunt Report on Operation Overreach
+# Threat Hunt Report - Operation Overreach
 
 **Case:** GF-INC-2026-0806 · Greenfield Logistics // Security Operations
 **Platform:** Hybrid — Entra ID + on-prem Active Directory
@@ -10,7 +10,7 @@
 
 ---
 
-## 1. Complete Scenario (Original)
+## 1. Complete Scenario
 
 ### Shift Handover
 
@@ -27,10 +27,23 @@
 >
 > — Hunt Lead, Greenfield SOC · Cyber Range Operations
 
+### Live Announcement
+
+> 🔴 **HUNT 13 // OVERREACH // LIVE**
+
+> Came in overnight. Defender raised a high-severity incident on a Greenfield account. It fired, it correlated, and it sat in the queue. Nobody worked it. That part is the job now.
+>
+> The queue is loud. Brute-force spray all over the board, and the easy read is that's the break-in. It isn't. Leave the racket. The real entry was clean, a login nobody questioned, and what came after was quiet and deliberate.
+>
+> The system did exactly what it was told. That was the whole problem.
+>
+> Difficulty: **Advanced**
+> 
+> Flags: **50**
+
 ### The Queue
 
 **[ 1 incident · unassigned ] High — INC-161166 — New — Unassigned**
-Cloud · Entra ID Protection + Defender for Identity + XDR · one user · 5 Aug
 
 | Time (5 Aug) | Severity | Alert |
 |---|---|---|
@@ -53,68 +66,6 @@ Cloud · Entra ID Protection + Defender for Identity + XDR · one user · 5 Aug
 
 > Both workspaces are shared and contaminated. Bind every query to 5–6 August 2026 and scope to the identities under investigation, or you are reading someone else's estate.
 
-### Method
-
-> The hunt opens with triage. Work the incident in the queue — the four triage questions unlock the cloud phase.
-> Some answers are in the alerts. Most are in the telemetry behind them. The centre of this hunt is something no alert caught at all.
-
-### Live Announcement
-
-> 🔴 **HUNT 13 // OVERREACH // LIVE**
-> New case, and it's yours.
-> Came in overnight. Defender raised a high-severity incident on a Greenfield account. It fired, it correlated, and it sat in the queue. Nobody worked it. That part is the job now.
-> The queue is loud. Brute-force spray all over the board, and the easy read is that's the break-in. It isn't. Leave the racket. The real entry was clean, a login nobody questioned, and what came after was quiet and deliberate.
-> Work the alert down to the truth. Prove every step in the telemetry, don't tell me what happened, show me. Some of it you only get by noticing what isn't there, and there's more than one thing in here built to look like the answer. Don't take the first that fits. When you have the chain, contain it. The right way, not the obvious one.
-> The system did exactly what it was told. That was the whole problem.
-> Read the brief before you start. Gate phrase is in it.
->
-> Difficulty: Advanced
-> Flags: 50 (+ Q00 gate)
-> Tiers: triage, investigation, response
-> Alerts: Microsoft Defender XDR / MDI
-> SIEM: Microsoft Sentinel + Advanced Hunting (KQL)
-> Telemetry: LAW-Cyber-Range + LAW-SilentCorridor
-> Window: 8 AUG 14:00 UTC >> 15 AUG 12:00 UTC
-> Prize pool $1,030. Top 3 + 7 random draws. Tiebreak on fastest. Draw from perfect finishers only.
-> Write it up at the end like a real engagement. Template's provided.
-> Timer's running.
-
-### Table Reference — Operation HELPLINE
-
-**Cloud Workspace — LAW-Cyber-Range**
-
-| Table | What it witnesses |
-|---|---|
-| SigninLogs | Interactive sign-in events, MFA outcomes, conditional-access results |
-| AADNonInteractiveUserSignInLogs | Non-interactive sign-ins, token refreshes, app-level auth, resource-scoped refusals |
-| IdentityLogonEvents | Identity-product logon telemetry, earliest witness of the session |
-| CloudAppEvents | Cloud application activity: file operations, mailbox actions, admin changes |
-| UrlClickEvents | Clicks on URLs within email, records the pivot from mail to file |
-| OfficeActivity | Exchange and SharePoint operations: inbox rules, mailbox settings, file access |
-| MicrosoftGraphActivityLogs | Graph API calls: enumeration bursts, AppId, URI fan-out, response codes |
-| AADUserRiskEvents | Risk detections raised and dismissed on an identity |
-| AuditLogs | Entra ID directory audit: MFA registration, settings reads/writes |
-| SecurityAlert | Alerts raised in the cloud tenant (identity-product and Defender alerts) |
-| SecurityIncident | Correlated cloud incidents, severity, status, escalation time |
-| NTANetAnalytics | Network flow analytics: source/dest IP, port sequences, internal reconnaissance |
-
-**On-Prem Workspace — LAW-SilentCorridor**
-
-| Table | What it witnesses |
-|---|---|
-| SecurityEvent | Windows Security log: logon (4624/4625), share access (5140/5145), replication rights (4662), group changes (4728) |
-| WindowsAccountMgmt_CL | Account management events: password resets (4724), account modifications |
-| WindowsCertServices_CL | Certificate Services: request (4886), issuance (4887), template, SAN |
-| WindowsObjectAccess_CL | Object access audit: file reads on domain shares, named paths |
-| WindowsDirChanges_CL | Directory changes: security descriptor modifications, ACE additions, correlation IDs |
-| LLMAgentLogs_CL | AI agent decision log: retrieved content, gate decisions, session IDs |
-| MCPToolCalls_CL | Tool-layer invocations: operation name, arguments (incl. password source), timestamps |
-| LinuxAuth_CL | Linux authentication: VPN PAM grantors, TOTP verification |
-| SecurityAlert | Alerts raised on the on-prem estate (custom analytic rules) |
-| SecurityIncident | Incidents correlated from on-prem alerts |
-
----
-
 ## 2. Objective
 
 Work Operation Overreach as a real post-compromise engagement: triage the correlated Defender incident, reconstruct the full attack chain across cloud and on-prem telemetry, prove every claim against the evidence rather than inferring from absence alone, identify decoys and false positives before accepting them, and produce containment and recovery recommendations appropriate to what was actually found — including persistence that survives partial remediation.
@@ -123,24 +74,14 @@ Work Operation Overreach as a real post-compromise engagement: triage the correl
 
 ## 3. Tools & Technologies
 
-- Microsoft Defender XDR
-- Microsoft Defender for Identity (MDI)
-- Microsoft Sentinel
-- KQL / Advanced Hunting
-- Entra ID / Azure AD
-- On-premises Active Directory
-- AD CS / Certificate Services
-- Exchange Online / Microsoft 365
-- OneDrive for Business / SharePoint Online
-- Microsoft Graph
-- OpenVPN
-- TOTP / Google Authenticator
-- Kerberos / `krbtgt`
-- DCSync / directory replication rights
-- Group Policy Preferences (GPP) / `Groups.xml`
-- Windows Security Event IDs: 4624, 4662, 4724, 4728, 4886, 4887
-- Custom telemetry tables: `LLMAgentLogs_CL`, `MCPToolCalls_CL`, `WindowsAccountMgmt_CL`, `WindowsCertServices_CL`, `WindowsObjectAccess_CL`, `WindowsDirChanges_CL`, `LinuxAuth_CL`
-- Suspected enumeration tooling: AzureHound, SharpHound (tool identity treated as inferred where telemetry does not directly name the executable)
+|  |
+| --- |
+|Microsoft Defender XDR |
+| Microsoft Defender for Identity (MDI) |
+| Microsoft Sentinel |
+| KQL / Advanced Hunting |
+| Entra ID / Azure AD |
+| On-premises Active Directory |
 
 ---
 
