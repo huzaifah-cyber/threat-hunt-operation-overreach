@@ -12,9 +12,14 @@
 
 ## 1. Complete Scenario
 
-### Shift Handover
+### ☠️ Short Summary
 
-> **// HANDOVER NOTE // Greenfield SOC — Cyber Range Operations**
+The attacker first gained access by using a stolen session cookie, allowing them to access the compromised user's account without knowing the password. From there, they collected files and credentials, including VPN access details, which gave them a path into the on-premises environment. They used automated discovery to map users, systems, groups, and available resources. They then abused stolen credentials and legitimate administrative functions to gain higher privileges and move further through the environment. The attacker also exploited certificate services, permissions, and other configuration weaknesses to create long-term access. Later, they abused a trusted AI helpdesk workflow to trigger an unauthorized account reset. Overall, the intrusion involved **stolen-session access, credential theft, discovery, privilege escalation, lateral movement, persistence, collection, and abuse of legitimate services and tooling**.
+
+---
+
+**// HANDOVER NOTE // Greenfield SOC — Cyber Range Operations**
+
 > From: Night shift // Hunt Lead
 > To: huzaifah-t-3586 // on shift
 > Re: GF-INC-2026-0806 — one incident, unworked
@@ -25,7 +30,9 @@
 >
 > It was detected and correlated in the cloud. The question is what happened after it fired, and where it leads beyond the cloud. Work it like a real case: start from the alert, form a view, prove it in the telemetry. When you write it up, redact sensitive detail — real names, emails, credentials, internal addresses — as on any live engagement.
 >
-> — Hunt Lead, Greenfield SOC · Cyber Range Operations
+> Hunt Lead, Greenfield SOC · Cyber Range Operations
+
+---
 
 ### Live Announcement
 
@@ -40,6 +47,8 @@
 > Difficulty: **Advanced**
 > 
 > Flags: **50**
+
+---
 
 ### The Queue
 
@@ -57,6 +66,8 @@
 > Queue also carries the usual estate noise — brute-force racket, false-positive study alerts. Part of the job is knowing what to leave.
 > One incident, one account, one evening. Start here. Where it leads is yours to find.
 
+---
+
 ### Your Surfaces
 
 - Alerts to triage → Microsoft Defender (the queue above)
@@ -65,6 +76,8 @@
 - Query surfaces → KQL in both workspaces, and MDE Advanced Hunting
 
 > Both workspaces are shared and contaminated. Bind every query to 5–6 August 2026 and scope to the identities under investigation, or you are reading someone else's estate.
+
+---
 
 ## 2. Objective
 
@@ -1243,36 +1256,16 @@ LLMAgentLogs_CL
 
 ---
 
-## 5. Recommendations
+## 🛡️ Security Recommendations
 
-### Immediate containment
+1. **Prevent privileged abuse:** Enforce independent requester and target verification at the agent/tool gate. This stops unauthorized actions before they happen instead of detecting them afterward.
 
-1. **Invalidate the live session before resetting the password.** The attacker held a replayed session/token, not just a credential — a password reset alone does not terminate an already-issued session.
-2. **Do not blanket-block the attacker's exit IPs** unless they are confirmed stable, uniquely attacker-controlled, and not shared with legitimate traffic — one of the four addresses observed also carried unrelated legitimate Azure CLI traffic.
-3. **Rotate `krbtgt` twice**, with the rotations separated by enough time for previously issued Kerberos tickets to expire, to fully invalidate any forged tickets.
-4. **Revoke the issued certificate and disable the vulnerable template.** Revocation alone only invalidates that one certificate — the underlying `GF-PrivilegedAccessLogon` template and its Authentication Mechanism Assurance mapping must be fixed or disabled to close the path permanently.
-5. **Remove the standing Control Access ACE** on the domain root, not just the group membership or the certificate — the ACE is a blanket grant that survives both.
+2. **Remove persistence:** Disable vulnerable ADCS templates, remove persistent ACEs, and eliminate GPP `cpassword` exposure. This prevents attackers from keeping access or regaining it after containment.
 
-### Detection and process
+3. **Contain compromised access:** Kill live sessions, rotate `krbtgt` twice, and revoke compromised certificates. This removes access that may remain valid even after passwords or accounts are changed.
 
-6. **Bring `LLMAgentLogs_CL` and `MCPToolCalls_CL` under analytic coverage.** These tables held the richest evidence for the confused-deputy chain but had zero rules watching them — the single most important coverage inversion in this hunt.
-7. **Build a cross-source correlation rule** joining the agent's gate decision (`gate_reason == "authorisation_marker_present"`) to the resulting AD action (4724 reset), firing when the reset target does not match the ticket's actual requester.
-8. **Enforce mandatory triage and escalation for high-confidence incidents.** Conventional techniques (DCSync, replication-rights abuse) were detected correctly — the failure was response latency and process, not detection.
-9. **Add preventive authorisation controls at the agent/tool gate**, requiring independent verification of the requester and target account before executing privileged actions. A detection rule fires after the fact and cannot prevent this class of authorisation failure.
-10. **Move MFA to a phishing-resistant factor (FIDO2/WebAuthn)** for accounts handling privileged access — TOTP re-enrolment alone does not help once the underlying seed is already in attacker hands.
+4. **Strengthen detection:** Monitor `LLMAgentLogs_CL` and `MCPToolCalls_CL`, with cross-source correlation for suspicious resets. This ensures activity in these high-value tables is detected and connected to the resulting account changes.
 
-### Recovery — credential rotation order
+5. **Improve response:** Mandate rapid triage and escalation for high-confidence alerts; treat detection latency as an SLA. The incident was detected, but faster action would have reduced its impact.
 
-1. `krbtgt` (double rotation)
-2. DSRM / DC local administrator credentials
-3. GPP/SYSVOL-sourced credentials — strip the exposed source first to prevent immediate re-exposure
-4. Service accounts
-5. User accounts
-6. Application credentials
-
-### Longer-term hardening
-
-- Remove or restrict the `GF-Tier0-Automation` group's exposure to non-Tier-0 accounts, and audit any other certificate templates carrying issuance-policy-to-group mappings.
-- Strip the GPP `cpassword` from `Groups.xml` on SYSVOL entirely — the encryption key has been public since 2012, and any authenticated domain user can read SYSVOL by design.
-- Extend dangerous-permissions audits to evaluate Control Access Right (`CR`) ACEs, not only `GenericAll`/`WriteDACL`/`WriteOwner` — the persistence in this incident was invisible to a full-control-only filter.
-- Treat scheduled analytic-rule cadence as a measured SLA, not an assumption — the correct rule here still took over 36 minutes to surface as an incident purely due to run interval.
+6. **Harden privileged access:** Use FIDO2/WebAuthn, restrict Tier-0 exposure, and rotate credentials in the correct recovery order. These controls make privileged accounts harder to compromise and limit the damage if one is breached.
