@@ -224,10 +224,10 @@ IdentityLogonEvents
 
 | Field | Value |
 |---|---|
-| **Answer** | mohammed_admin@lognpacific.com — scope by account/session identity |
+| **Answer** | [Redacted]@lognpacific.com — scope by account/session identity |
 | **Time (UTC)** | 2026-08-05T19:59:45.933Z – 2026-08-05T21:11:14.420Z |
 
-**Details:** The same IP (159.26.115.80) also carries non-interactive Azure CLI traffic from mohammed_admin@lognpacific.com — a different domain (.com vs m.smith's .org) and a different application pattern than the attacker's interactive browser/Outlook/Teams activity. The address is shared egress infrastructure, not an attacker fingerprint, so scoping the hunt to it directly would have pulled an unrelated identity into the investigation. Scope by account/session instead of source IP.
+**Details:** The same IP (159.26.115.80) also carries non-interactive Azure CLI traffic from  [Redacted]@lognpacific.com — a different domain (.com vs m.smith's .org) and a different application pattern than the attacker's interactive browser/Outlook/Teams activity. The address is shared egress infrastructure, not an attacker fingerprint, so scoping the hunt to it directly would have pulled an unrelated identity into the investigation. Scope by account/session instead of source IP.
 
 **Query:**
 ```kql
@@ -253,7 +253,7 @@ AADNonInteractiveUserSignInLogs
 | **Answer** | Invoice_Reconciliation_Q3.xlsx |
 | **Time (UTC)** | 2026-08-05T18:59:27.3709105Z |
 
-**Details:** A Safe Links-scanned URL click bridges the mailbox and the cloud file: the record's Workload is Email (mail-sourced), pointing to Invoice_Reconciliation_Q3.xlsx hosted on an external tenant (joshmadakorgmail-my.sharepoint.com), not Greenfield's own SharePoint. No search precedes the file access — this click is the only thing that explains how the session got there, and it also flags the file as living outside the org's own storage.
+**Details:** A Safe Links-scanned URL click bridges the mailbox and the cloud file: the record's Workload is Email (mail-sourced), pointing to Invoice_Reconciliation_Q3.xlsx hosted on an external tenant ([Redacted]-my.sharepoint.com), not Greenfield's own SharePoint. No search precedes the file access — this click is the only thing that explains how the session got there, and it also flags the file as living outside the org's own storage.
 
 **Query:**
 ```kql
@@ -276,7 +276,7 @@ UrlClickEvents
 
 | Field | Value |
 |---|---|
-| **Answer** | https://joshmadakorgmail-my.sharepoint.com/personal/m_smith_lognpacific_org/Documents/Personal.kdbx, FileRestored |
+| **Answer** | https://[Redacted]-my.sharepoint.com/personal/m_smith_lognpacific_org/Documents/Personal.kdbx, FileRestored |
 | **Time (UTC)** | 2026-08-05T19:05:59Z |
 
 **Details:** Amid an otherwise one-directional burst of reads and downloads, one action reverses direction — Personal.kdbx, a KeePass password database, is restored (not read or taken) in m_smith's personal OneDrive vault. Restoring rather than simply accessing an existing file implies the attacker needed a prior version of the vault back — consistent with recovering credentials that had since been changed, deleted, or overwritten, rather than just harvesting what was already sitting there.
