@@ -1269,3 +1269,7 @@ LLMAgentLogs_CL
 5. **Improve response:** Mandate rapid triage and escalation for high-confidence alerts; treat detection latency as an SLA. The incident was detected, but faster action would have reduced its impact.
 
 6. **Harden privileged access:** Use FIDO2/WebAuthn, restrict Tier-0 exposure, and rotate credentials in the correct recovery order. These controls make privileged accounts harder to compromise and limit the damage if one is breached.
+
+---
+
+<img src="assets/score.png" width="1100">
