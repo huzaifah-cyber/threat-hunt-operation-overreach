@@ -104,7 +104,7 @@ Work Operation Overreach as a real post-compromise engagement: triage the correl
 
 **What to find:** Among ten correlated alerts, identify the one High-severity alert from the identity product that describes how the session is being held, not where the sign-in came from.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -121,7 +121,7 @@ Work Operation Overreach as a real post-compromise engagement: triage the correl
 
 **What to find:** A second High fired later the same evening from the same product, describing account behaviour rather than sign-in risk. Name the tactic/phase it evidences.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -138,7 +138,7 @@ Work Operation Overreach as a real post-compromise engagement: triage the correl
 
 **What to find:** Two on-prem High alerts fired; one predates the DC coming online and is unrelated to the attack. Identify the false positive.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -164,7 +164,7 @@ SecurityAlert
 
 **What to find:** Measure the unwitnessed gap between the cloud incident escalating High and the first attacker action inside the on-prem estate.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -194,7 +194,7 @@ LinuxAuth_CL
 
 **What to find:** Find the identity's true earliest witnessed action — to the millisecond — rather than the later moment the product first detected it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -220,7 +220,7 @@ IdentityLogonEvents
 
 **What to find:** A second identity shares the attacker's source IP. Name it, and state the correct way to scope the hunt instead of by IP.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -246,7 +246,7 @@ AADNonInteractiveUserSignInLogs
 
 **What to find:** Identify the single record that bridges the mailbox to the cloud file the attacker accessed next, with no search step in between.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -272,7 +272,7 @@ UrlClickEvents
 
 **What to find:** In a burst of otherwise one-directional file reads/downloads, one action puts a file back. Identify the file and the retrieval action.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -297,7 +297,7 @@ CloudAppEvents
 
 **What to find:** One collected file isn't a password store — it's what actually converts the cloud compromise into on-prem access. Name it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -324,7 +324,7 @@ OfficeActivity
 
 **What to find:** Mail is leaving the mailbox with no inbox rule ever created. Identify the operation that actually set the forward.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -349,7 +349,7 @@ OfficeActivity
 
 **What to find:** The forward's bounce/NDR notifications vanished. Identify the operation that removed them.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -374,7 +374,7 @@ OfficeActivity
 
 **What to find:** Two risk detections were cleared mid-session by something other than an analyst. Identify the automated dismissal detail.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -400,7 +400,7 @@ AADUserRiskEvents
 
 **What to find:** A one-minute burst of directory calls needs a measure derived from the call pattern itself — not the swappable client app — that no human could produce.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -427,7 +427,7 @@ MicrosoftGraphActivityLogs
 
 **What to find:** One class of read in the burst was consistently refused. Identify the response code and what being refused cost the attacker.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -453,7 +453,7 @@ MicrosoftGraphActivityLogs
 
 **What to find:** Exactly one directory-audit record exists for the identity. Identify the operation and what its being a read (not a write) proves about persistence.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -481,7 +481,7 @@ AuditLogs
 
 **What to find:** The same client kept trying a second resource for forty minutes with zero calls in the activity log. Identify the client, the refusal code, and the resource.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -509,7 +509,7 @@ AADNonInteractiveUserSignInLogs
 
 **What to find:** The identity authenticates to the VPN cleanly, both MFA factors satisfied on the first try. Identify the second factor's true source.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -536,7 +536,7 @@ LinuxAuth_CL
 
 **What to find:** Internal recon against the DC never appears in the on-prem SIEM directly. Identify the destination port sequence that reveals the whole sweep in one table.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -562,7 +562,7 @@ NTANetAnalytics
 
 **What to find:** A tight named-pipe burst against the DC precedes an artifact dropping on the host. Name the tool, and state what is inferred rather than directly observed.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -588,7 +588,7 @@ WindowsObjectAccess_CL
 
 **What to find:** Two account resets ran in the same window; one is benign. Identify the non-human identity that performed the hostile one.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -613,7 +613,7 @@ WindowsAccountMgmt_CL
 
 **What to find:** A forged block was embedded inside a genuine support ticket, dressed as an automated security notice. Identify its tag.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -639,7 +639,7 @@ LLMAgentLogs_CL
 
 **What to find:** The gate accepted a request because a marker was present, not because it was verified. Identify the reference marker it logged.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -665,7 +665,7 @@ LLMAgentLogs_CL
 
 **What to find:** Between the agent's decision and the AD write landing, a tool executed the action. Identify the operation it invoked.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -690,7 +690,7 @@ MCPToolCalls_CL
 
 **What to find:** One field in the tool call's arguments separates this reset from every benign self-service reset. Identify the field and its value.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -715,7 +715,7 @@ MCPToolCalls_CL
 
 **What to find:** Neither the agent turn nor the reset is suspicious alone. Identify the two events and the single field comparison that reveals the mismatch.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -745,7 +745,7 @@ WindowsAccountMgmt_CL
 
 **What to find:** Prove — don't assume — that no alert covers the reset/agent chain by sweeping both workspaces, then identify the nearest High-severity alert regardless of relevance.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -771,7 +771,7 @@ SecurityAlert
 
 **What to find:** The reset account requests a certificate and receives it 60ms later. Identify the certificate template.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -797,7 +797,7 @@ WindowsCertServices_CL
 
 **What to find:** Strong certificate binding accepted this certificate. Identify the identity it actually carried and the specific template mechanism that granted the privilege.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -823,7 +823,7 @@ WindowsCertServices_CL
 
 **What to find:** No administrator added this account to a privileged group, yet it holds privileged rights minutes later. Identify the group.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -849,7 +849,7 @@ SecurityEvent
 
 **What to find:** Every account's secrets left the DC in under five seconds with no memory access. Identify the technique and the specific replication right that proves it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -876,7 +876,7 @@ SecurityEvent
 
 **What to find:** Two writes touch the same object's security descriptor; one is a no-op. Identify the real write and why a dangerous-permissions audit misses it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -902,7 +902,7 @@ WindowsDirChanges_CL
 
 **What to find:** The same replication operation ran 45 minutes earlier with no alert. Identify the principal and why the rule correctly excluded it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -929,7 +929,7 @@ SecurityEvent
 
 **What to find:** Compare when the hostile replication happened against when the incident actually opened. State the gap and whether it's a scheduling or logic issue.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -955,7 +955,7 @@ Cross-referenced against the alert "GF Directory - Replication Rights By Non-Mac
 
 **What to find:** The last file read is a world-readable policy file off a domain share. Recover the credential stored inside it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -980,7 +980,7 @@ WindowsObjectAccess_CL
 
 **What to find:** One recovered file holds three credentials with very different blast radii. Identify the one that matters most on a domain controller.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1005,7 +1005,7 @@ WindowsObjectAccess_CL
 
 **What to find:** Two identities did the collection; one stopped early, the other swept everything, with no denial event marking the handover. Identify the sweeping identity and how many distinct shares it touched.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1032,7 +1032,7 @@ SecurityEvent
 
 **What to find:** One collected file isn't a credential store — its contents involve someone outside the incident entirely, crossing the breach-notification threshold. Name it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1058,7 +1058,7 @@ WindowsObjectAccess_CL
 
 **What to find:** Identify the table holding the richest evidence for the agent-driven chain that has zero analytic rules watching it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1083,7 +1083,7 @@ LLMAgentLogs_CL
 
 **What to find:** Design the cross-source correlation rule (tables + logic) that would have caught the confused-deputy reset by joining the agent decision to the AD action.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1115,7 +1115,7 @@ LLMAgentLogs_CL
 
 **What to find:** State where the actual failure sits — detection or response — and name the cheapest control that would fix it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1128,7 +1128,7 @@ LLMAgentLogs_CL
 
 **What to find:** State the correct first containment action given the attacker holds a live session, not just a password.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1141,7 +1141,7 @@ LLMAgentLogs_CL
 
 **What to find:** Decide whether to blanket-block the attacker's four exit IPs, and under what condition that would be acceptable.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1154,7 +1154,7 @@ LLMAgentLogs_CL
 
 **What to find:** State the correct krbtgt rotation strategy needed to fully invalidate attacker-forged Kerberos material.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1167,7 +1167,7 @@ LLMAgentLogs_CL
 
 **What to find:** Given three specific remediation actions taken, determine whether the attacker is actually evicted.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1180,7 +1180,7 @@ LLMAgentLogs_CL
 
 **What to find:** Determine whether revoking the issued certificate alone closes the ADCS persistence path, and state what actually does.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1193,7 +1193,7 @@ LLMAgentLogs_CL
 
 **What to find:** Assess whether a detection rule can fix this class of authorisation failure at all, and state the real alternative.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1206,7 +1206,7 @@ LLMAgentLogs_CL
 
 **What to find:** Explain why hunting for a malicious inbox rule will fail here, and state the correct place to look and act instead.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1219,7 +1219,7 @@ LLMAgentLogs_CL
 
 **What to find:** Explain why simply re-enrolling TOTP does not solve the MFA compromise, and name the actual control needed.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1232,7 +1232,7 @@ LLMAgentLogs_CL
 
 **What to find:** Rank three candidate interventions by how much they would have reduced impact, with justification for the order.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
@@ -1247,7 +1247,7 @@ LLMAgentLogs_CL
 
 **What to find:** Produce the correct, ordered credential-rotation list needed to fully recover the environment without re-exposing it.
 
-**Flag Data Block**
+
 
 | Field | Value |
 |---|---|
