@@ -12,7 +12,7 @@
 
 ## 1. Complete Scenario
 
-### ☠️ Short Summary
+### Summary
 
 The attacker first gained access by using a stolen session cookie, allowing them to access the compromised user's account without knowing the password. From there, they collected files and credentials, including VPN access details, which gave them a path into the on-premises environment. They used automated discovery to map users, systems, groups, and available resources. They then abused stolen credentials and legitimate administrative functions to gain higher privileges and move further through the environment. The attacker also exploited certificate services, permissions, and other configuration weaknesses to create long-term access. Later, they abused a trusted AI helpdesk workflow to trigger an unauthorized account reset. Overall, the intrusion involved **stolen-session access, credential theft, discovery, privilege escalation, lateral movement, persistence, collection, and abuse of legitimate services and tooling**.
 
